@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga SESI de Basquete 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #FF8C42 0%, #E67E22 100%);
+            color: #2C3E50;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 25px 0;
+            background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: headerSlide 0.8s ease-out;
+        }
+        
+        @keyframes headerSlide {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: buttonsAppear 1s ease-out 0.3s both;
+        }
+        
+        @keyframes buttonsAppear {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .btn {
+            padding: 18px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(to right, #2C3E50, #4A6580);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .content-section {
+            display: none;
+            background-color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            animation: formSlide 0.5s ease-out;
+        }
+        
+        @keyframes formSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2C3E50;
+            font-size: 1.1rem;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #DDD;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            border-color: #E67E22;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #E67E22;
+        }
+        
+        .game-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #F9F9F9, #FFFFFF);
+            border-radius: 15px;
+            border-left: 5px solid #E67E22;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            animation: gameItemAppear 0.5s ease-out;
+        }
+        
+        @keyframes gameItemAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .game-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .game-date {
+            font-weight: bold;
+            color: #E67E22;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .game-teams {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .game-location {
+            color: #7F8C8D;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background-color: #2C3E50;
+            color: white;
+            border-radius: 15px;
+            animation: footerAppear 1s ease-out 0.5s both;
+        }
+        
+        @keyframes footerAppear {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .copyright {
+            border: 2px solid #FFF;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .update-info {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .no-games {
+            text-align: center;
+            padding: 30px;
+            color: #7F8C8D;
+            font-style: italic;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+            }
+            
+            .buttons-container {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>LIGA SESI DE BASQUETE 2025</h1>
+            <p class="subtitle">SUB 13 MASCULINO - CAPITAL + VALE</p>
+        </header>
+        
+        <div class="buttons-container">
+            <button class="btn" id="calendarBtn">
+                <i class="fas fa-calendar-alt"></i> Calendário de Jogos
+            </button>
+            <button class="btn" id="scoresBtn">
+                <i class="fas fa-basketball-ball"></i> Placares
+            </button>
+        </div>
+        
+        <div id="calendarSection" class="content-section">
+            <div class="form-group">
+                <label for="teamSelect"><i class="fas fa-users"></i> Qual SESI você gostaria de pesquisar?</label>
+                <select id="teamSelect">
+                    <option value="">Selecione um time</option>
+                    <option value="Guarulhos A">Guarulhos A</option>
+                    <option value="Guarulhos B">Guarulhos B</option>
+                    <option value="AE Carvalho">AE Carvalho</option>
+                    <option value="Jacareí">Jacareí</option>
+                    <option value="São Jose dos Campos">São Jose dos Campos</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="startDate"><i class="fas fa-calendar-day"></i> Data inicial:</label>
+                <input type="date" id="startDate">
+            </div>
+            
+            <div class="form-group">
+                <label for="endDate"><i class="fas fa-calendar-day"></i> Data final:</label>
+                <input type="date" id="endDate">
+            </div>
+            
+            <button class="btn" id="searchBtn">
+                <i class="fas fa-search"></i> Buscar Jogos
+            </button>
+            
+            <div id="calendarResults" class="results"></div>
+        </div>
+        
+        <div id="scoresSection" class="content-section">
+            <h2><i class="fas fa-history"></i> Últimos 5 Jogos</h2>
+            <div id="scoresResults">
+                <div class="game-item">
+                    <div class="game-date">14/jun - 8h30</div>
+                    <div class="game-teams">Guarulhos B x Jacareí</div>
+                    <div class="game-location"><i class="fas fa-map-marker-alt"></i> Local: JACAREI</div>
+                    <div class="game-score">Placar: 42 x 38</div>
+                </div>
+                <div class="game-item">
+                    <div class="game-date">14/jun - 11h30</div>
+                    <div class="game-teams">AE Carvalho x Guarulhos A</div>
+                    <div class="game-location"><i class="fas fa-map-marker-alt"></i> Local: JACAREI</div>
+                    <div class="game-score">Placar: 35 x 40</div>
+                </div>
+                <div class="game-item">
+                    <div class="game-date">14/jun - 14h30</div>
+                    <div class="game-teams">São Jose dos Campos x AE Carvalho</div>
+                    <div class="game-location"><i class="fas fa-map-marker-alt"></i> Local: JACAREI</div>
+                    <div class="game-score">Placar: 45 x 32</div>
+                </div>
+                <div class="game-item">
+                    <div class="game-date">05/jul - 8h30</div>
+                    <div class="game-teams">AE Carvalho x Guarulhos B</div>
+                    <div class="game-location"><i class="fas fa-map-marker-alt"></i> Local: AE CARVALHO</div>
+                    <div class="game-score">Placar: 38 x 41</div>
+                </div>
+                <div class="game-item">
+                    <div class="game-date">05/jul - 10h</div>
+                    <div class="game-teams">Jacareí x São Jose dos Campos</div>
+                    <div class="game-location"><i class="fas fa-map-marker-alt"></i> Local: AE CARVALHO</div>
+                    <div class="game-score">Placar: 36 x 39</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="copyright">
+            Todos os direitos reservados Davi Bueno 2025&reg;
+        </div>
+        <div class="update-info">
+            O site é atualizado todo mês (:
+        </div>
+    </footer>
+
+    <script>
+        // Dados dos jogos corrigidos
+        const games = [
+            { date: '2025-06-14', time: '8h30', teamA: 'Guarulhos B', teamB: 'Jacareí', location: 'JACAREI' },
+            { date: '2025-06-14', time: '11h30', teamA: 'AE Carvalho', teamB: 'Guarulhos A', location: 'JACAREI' },
+            { date: '2025-06-14', time: '14h30', teamA: 'São Jose dos Campos', teamB: 'AE Carvalho', location: 'JACAREI' },
+            { date: '2025-07-05', time: '8h30', teamA: 'AE Carvalho', teamB: 'Guarulhos B', location: 'AE CARVALHO' },
+            { date: '2025-07-05', time: '10h', teamA: 'Jacareí', teamB: 'São Jose dos Campos', location: 'AE CARVALHO' },
+            { date: '2025-07-05', time: '11h30', teamA: 'Guarulhos A', teamB: 'Guarulhos B', location: 'AE CARVALHO' },
+            { date: '2025-07-05', time: '13h', teamA: 'Guarulhos A', teamB: 'São Jose dos Campos', location: 'AE CARVALHO' },
+            { date: '2025-07-05', time: '14h30', teamA: 'AE Carvalho', teamB: 'Jacareí', location: 'AE CARVALHO' },
+            { date: '2025-08-23', time: '8h30', teamA: 'Guarulhos B', teamB: 'São Jose dos Campos', location: 'SÃO JOSE DOS CAMPOS' },
+            { date: '2025-08-23', time: '11h30', teamA: 'Guarulhos A', teamB: 'Jacareí', location: 'SÃO JOSE DOS CAMPOS' },
+            { date: '2025-08-23', time: '14h30', teamA: 'Guarulhos A', teamB: 'AE Carvalho', location: 'SÃO JOSE DOS CAMPOS' },
+            { date: '2025-09-20', time: '8h30', teamA: 'Jacareí', teamB: 'Guarulhos B', location: 'AE CARVALHO' },
+            { date: '2025-09-20', time: '10h', teamA: 'AE Carvalho', teamB: 'São Jose dos Campos', location: 'AE CARVALHO' },
+            { date: '2025-09-20', time: '11h30', teamA: 'Guarulhos B', teamB: 'Guarulhos A', location: 'AE CARVALHO' },
+            { date: '2025-09-20', time: '13h', teamA: 'São Jose dos Campos', teamB: 'Jacareí', location: 'AE CARVALHO' },
+            { date: '2025-10-18', time: '8h30', teamA: 'Guarulhos B', teamB: 'AE Carvalho', location: 'GUARULHOS' },
+            { date: '2025-10-18', time: '10h', teamA: 'São Jose dos Campos', teamB: 'Guarulhos A', location: 'GUARULHOS' },
+            { date: '2025-10-18', time: '11h30', teamA: 'Jacareí', teamB: 'AE Carvalho', location: 'GUARULHOS' },
+            { date: '2025-10-18', time: '13h', teamA: 'São Jose dos Campos', teamB: 'Guarulhos B', location: 'GUARULHOS' },
+            { date: '2025-10-18', time: '14h30', teamA: 'Jacareí', teamB: 'Guarulhos A', location: 'GUARULHOS' }
+        ];
+
+        // Elementos da interface
+        const calendarBtn = document.getElementById('calendarBtn');
+        const scoresBtn = document.getElementById('scoresBtn');
+        const calendarSection = document.getElementById('calendarSection');
+        const scoresSection = document.getElementById('scoresSection');
+        const searchBtn = document.getElementById('searchBtn');
+        const calendarResults = document.getElementById('calendarResults');
+
+        // Mostrar a seção de calendário por padrão
+        window.addEventListener('load', () => {
+            calendarSection.classList.add('active');
+            
+            // Definir datas padrão para o formulário
+            const today = new Date();
+            const nextMonth = new Date(today);
+            nextMonth.setMonth(today.getMonth() + 1);
+            
+            document.getElementById('startDate').valueAsDate = today;
+            document.getElementById('endDate').valueAsDate = nextMonth;
+        });
+
+        // Alternar entre as seções com animação
+        calendarBtn.addEventListener('click', () => {
+            if (!calendarSection.classList.contains('active')) {
+                calendarSection.classList.add('active');
+                scoresSection.classList.remove('active');
+                
+                // Animação de entrada
+                calendarSection.style.animation = 'none';
+                setTimeout(() => {
+                    calendarSection.style.animation = 'fadeIn 0.5s ease';
+                }, 10);
+            }
+        });
+
+        scoresBtn.addEventListener('click', () => {
+            if (!scoresSection.classList.contains('active')) {
+                scoresSection.classList.add('active');
+                calendarSection.classList.remove('active');
+                
+                // Animação de entrada
+                scoresSection.style.animation = 'none';
+                setTimeout(() => {
+                    scoresSection.style.animation = 'fadeIn 0.5s ease';
+                }, 10);
+            }
+        });
+
+        // Buscar jogos
+        searchBtn.addEventListener('click', () => {
+            const selectedTeam = document.getElementById('teamSelect').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (!selectedTeam || !startDate || !endDate) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const filteredGames = games.filter(game => {
+                const gameDate = new Date(game.date);
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                
+                const isInDateRange = gameDate >= start && gameDate <= end;
+                const involvesTeam = game.teamA === selectedTeam || game.teamB === selectedTeam;
+                
+                return isInDateRange && involvesTeam;
+            });
+            
+            displayResults(filteredGames, selectedTeam);
+        });
+
+        // Exibir resultados
+        function displayResults(gamesList, team) {
+            if (gamesList.length === 0) {
+                calendarResults.innerHTML = '<div class="no-games"><i class="fas fa-exclamation-circle"></i><p>Nenhum jogo encontrado para o time selecionado no período especificado.</p></div>';
+                return;
+            }
+            
+            let html = `<h3><i class="fas fa-list"></i> Jogos do ${team}</h3>`;
+            
+            gamesList.forEach(game => {
+                // Formatar a data para exibição (dd/mm)
+                const dateObj = new Date(game.date);
+                const day = dateObj.getDate().toString().padStart(2, '0');
+                const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+                const formattedDate = `${day}/${month}`;
+                
+                html += `
+                    <div class="game-item">
+                        <div class="game-date">${formattedDate} - ${game.time}</div>
+                        <div class="game-teams">${game.teamA} x ${game.teamB}</div>
+                        <div class="game-location"><i class="fas fa-map-marker-alt"></i> Local: ${game.location}</div>
+                    </div>
+                `;
+            });
+            
+            calendarResults.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
